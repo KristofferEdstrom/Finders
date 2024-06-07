@@ -1,22 +1,19 @@
 // src/App.jsx
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Hero from './components/Hero';
 import ServiceCategories from './components/ServiceCategories';
 import FeaturedServices from './components/FeaturedServices';
-import { Routes, Route } from 'react-router-dom';
-import About from './components/About';
-import Home from './components/Home';
-import ServiceList from './components/ServiceList';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import Dashboard from './components/Dashboard';  // Import Dashboard component
-import PrivateRoute from './components/PrivateRoute';
+import Dashboard from './components/Dashboard';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Header />
       <Routes>
         <Route path="/" element={
@@ -26,11 +23,13 @@ function App() {
             <FeaturedServices />
           </>
         } />
-        <Route path="/services" element={<ServiceList />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<ServiceCategories />} />
+        <Route path="/about" element={<FeaturedServices />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+        <Route path="/dashboard" element={<ProtectedRoute />}>
+          <Route path="" element={<Dashboard />} />
+        </Route>
       </Routes>
       <Footer />
     </div>

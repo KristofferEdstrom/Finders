@@ -2,12 +2,23 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { useAuth } from '../context/AuthContext';  // Correctly import useAuth
 
 const Header = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { currentUser, logout } = useAuth();  // Correctly use useAuth
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      // Optionally, navigate to home or login page
+    } catch (error) {
+      console.error('Logout failed', error);
+    }
   };
 
   return (
@@ -18,8 +29,18 @@ const Header = () => {
           <Link to="/" className="hover:underline">Home</Link>
           <Link to="/services" className="hover:underline">Services</Link>
           <Link to="/about" className="hover:underline">About</Link>
-          <Link to="/login" className="hover:underline">Login</Link>
-          <Link to="/signup" className="hover:underline">Sign Up</Link>
+          {currentUser ? (
+            <>
+              <span className="hover:underline">Welcome, {currentUser.email}</span>
+              <button onClick={handleLogout} className="hover:underline">Logout</button>
+              <Link to="/dashboard" className="hover:underline">Dashboard</Link>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="hover:underline">Login</Link>
+              <Link to="/signup" className="hover:underline">Sign Up</Link>
+            </>
+          )}
         </nav>
         <div className="md:hidden">
           <button onClick={toggleMobileMenu} className="text-2xl focus:outline-none">
@@ -32,8 +53,18 @@ const Header = () => {
           <Link to="/" className="block hover:underline" onClick={toggleMobileMenu}>Home</Link>
           <Link to="/services" className="block hover:underline" onClick={toggleMobileMenu}>Services</Link>
           <Link to="/about" className="block hover:underline" onClick={toggleMobileMenu}>About</Link>
-          <Link to="/login" className="block hover:underline" onClick={toggleMobileMenu}>Login</Link>
-          <Link to="/signup" className="block hover:underline" onClick={toggleMobileMenu}>Sign Up</Link>
+          {currentUser ? (
+            <>
+              <span className="block hover:underline">Welcome, {currentUser.email}</span>
+              <button onClick={() => {toggleMobileMenu(); handleLogout();}} className="block hover:underline">Logout</button>
+              <Link to="/dashboard" className="block hover:underline" onClick={toggleMobileMenu}>Dashboard</Link>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="block hover:underline" onClick={toggleMobileMenu}>Login</Link>
+              <Link to="/signup" className="block hover:underline" onClick={toggleMobileMenu}>Sign Up</Link>
+            </>
+          )}
         </nav>
       )}
     </header>

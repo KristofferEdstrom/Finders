@@ -2,7 +2,12 @@
 import React from 'react';
 
 const ServiceCategories = () => {
-  const categories = ['Web Development', 'Graphic Design', 'Digital Marketing', 'Writing & Translation'];
+  const categories = [
+    { name: 'Web Development', image: '/images/web-development.jpg' },
+    { name: 'Graphic Design', image: '/images/graphic-design.jpg' },
+    { name: 'Digital Marketing', image: '/images/digital-marketing.jpg' },
+    { name: 'Writing & Translation', image: '/images/writing-translation.jpg' },
+  ];
 
   return (
     <section className="py-20 px-4 md:py-40 md:px-8">
@@ -11,8 +16,9 @@ const ServiceCategories = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {categories.map((category, index) => (
             <div key={index} className="bg-white p-6 rounded shadow-md">
-              <h3 className="text-xl font-bold mb-4">{category}</h3>
-              <p>Find the best professionals in {category.toLowerCase()}.</p>
+              <img src={category.image} alt={category.name} className="w-full h-40 object-cover mb-4 rounded" />
+              <h3 className="text-xl font-bold mb-4">{category.name}</h3>
+              <p>Find the best professionals in {category.name.toLowerCase()}.</p>
             </div>
           ))}
         </div>
