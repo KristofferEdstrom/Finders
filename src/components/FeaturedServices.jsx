@@ -1,27 +1,28 @@
+// src/components/FeaturedServices.jsx
 import React from 'react';
 
-const services = [
-  { name: 'Logo Design', provider: 'John Doe', price: '$50', image: '/images/logo-design.jpg' },
-  { name: 'SEO Optimization', provider: 'Jane Smith', price: '$200', image: '/images/seo-optimization.jpg' },
-  { name: 'Mobile App Development', provider: 'Sam Wilson', price: '$1500', image: '/images/mobile-app-development.jpg' },
-];
+const FeaturedServices = () => {
+  const services = [
+    { title: 'Website Design', description: 'Get a professional website design.' },
+    { title: 'SEO Services', description: 'Improve your website ranking on search engines.' },
+    { title: 'Content Writing', description: 'High-quality content writing services.' },
+  ];
 
-const FeaturedServices = () => (
-  <div className="p-10 bg-gray-50">
-    <h2 className="text-2xl font-bold text-gray-800 mb-6">Featured Services</h2>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {services.map((service) => (
-        <div key={service.name} className="bg-white shadow-md rounded overflow-hidden">
-          <img src={service.image} alt={service.name} className="w-full h-48 object-cover" />
-          <div className="p-4">
-            <h3 className="text-xl font-bold text-gray-800">{service.name}</h3>
-            <p className="text-gray-600">by {service.provider}</p>
-            <p className="text-green-500 font-bold">{service.price}</p>
-          </div>
+  return (
+    <section className="bg-gray-100 py-20 px-4 md:py-40 md:px-8">
+      <div className="container mx-auto text-center">
+        <h2 className="text-3xl md:text-5xl font-bold mb-8">Featured Services</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {services.map((service, index) => (
+            <div key={index} className="bg-white p-6 rounded shadow-md">
+              <h3 className="text-xl font-bold mb-4">{service.title}</h3>
+              <p>{service.description}</p>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-  </div>
-);
+      </div>
+    </section>
+  );
+};
 
 export default FeaturedServices;

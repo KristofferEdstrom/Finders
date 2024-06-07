@@ -1,27 +1,24 @@
+// src/components/ServiceCategories.jsx
 import React from 'react';
 
-const categories = [
-  { name: 'Graphic Design', image: '/images/graphic-design.jpg' },
-  { name: 'Digital Marketing', image: '/images/digital-marketing.jpg' },
-  { name: 'Writing & Translation', image: '/images/writing-translation.jpg' },
-  { name: 'Video & Animation', image: '/images/video-animation.jpg' },
-  { name: 'Programming & Tech', image: '/images/programming-tech.jpg' },
-];
+const ServiceCategories = () => {
+  const categories = ['Web Development', 'Graphic Design', 'Digital Marketing', 'Writing & Translation'];
 
-const ServiceCategories = () => (
-  <div className="p-10">
-    <h2 className="text-2xl font-bold text-gray-800 mb-6">Explore Categories</h2>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {categories.map((category) => (
-        <div key={category.name} className="bg-white shadow-md rounded overflow-hidden">
-          <img src={category.image} alt={category.name} className="w-full h-48 object-cover" />
-          <div className="p-4">
-            <h3 className="text-xl font-bold text-gray-800">{category.name}</h3>
-          </div>
+  return (
+    <section className="py-20 px-4 md:py-40 md:px-8">
+      <div className="container mx-auto text-center">
+        <h2 className="text-3xl md:text-5xl font-bold mb-8">Service Categories</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {categories.map((category, index) => (
+            <div key={index} className="bg-white p-6 rounded shadow-md">
+              <h3 className="text-xl font-bold mb-4">{category}</h3>
+              <p>Find the best professionals in {category.toLowerCase()}.</p>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-  </div>
-);
+      </div>
+    </section>
+  );
+};
 
 export default ServiceCategories;
